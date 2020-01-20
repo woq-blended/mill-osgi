@@ -27,9 +27,9 @@ def test() = T.command {
 }
 
 def install() = T.command {
-  T.ctx().log.info("Installing")
   test()()
   core.publishLocal()()
+  T.ctx().log.info("Installed version [${core.publishVersion()}]")
 }
 
 def checkRelease: T[Boolean] = T.input {
