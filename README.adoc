@@ -1,6 +1,6 @@
 = mill-osgi - Build OSGi Bundles with mill
 :mill-min-version: 0.5.7
-:mill-osgi-version: 0.1.1
+:mill-osgi-version: 0.1.2
 :toc:
 :toc-placement: preamble
 
@@ -75,6 +75,10 @@ To produce OSGi bundles, your module has to implement link:core/src/de/tobiasroe
 * `def explodedJars: T[Seq[PathRef]]` -
   Embed the content of the given JAR files into the bundle.
 
+*  `def exportContents: T[Seq[String]]` -
+  Exports the given packages but does not try to include them from the class path.
+  The packages should be loaded with alternative means.
+
 * `def osgiHeaders: T[OsgiHeaders]` -
   Various OSGi headers defining the OSGi bundle.
   You should always use `OsgiHeaders.copy` to customize some headers to not loose useful defaults.
@@ -107,10 +111,10 @@ No packages will be exported via `Export-Package`.
 
 === `Bundle-SymbolicName`
 
-If the module does not extends `PublishModule`, the bundle symbolic name will be initializes with `JavaModule.artifactName`.
+If the module does not extends `PublishModule`, the bundle symbolic name will be initializes with `JavaModule.artifactId`.
 
-If the module extends `PublishModule`, the `Bundle-SymbolicName` is computed using from `PublishModule.pomSettings.organization` and `JavaModule.artifactName`.
-If the organization or the last segment of the organization is a prefix of the artifactName, than that redundant part is omited.
+If the module extends `PublishModule`, the `Bundle-SymbolicName` is computed using from `PublishModule.pomSettings.organization` and `JavaModule.artifactId`.
+If the organization or the last segment of the organization is a prefix of the artifactName, than that redundant part is omitted.
 
 
 == License
@@ -128,7 +132,8 @@ The following table shows a matrix of compatible mill and mill-osgi versions.
 [options="header"]
 |===
 | mill-osgi | mill
-| 0.1.1 | 0.5.7
+| 0.1.2 | 0.5.7 - 0.5.9
+| 0.1.1 | 0.5.7 - 0.5.9
 | 0.1.0 | 0.3.6 - 0.5.3
 | 0.0.6 | 0.3.6 - 0.5.3
 | 0.0.5 | 0.3.5
@@ -139,6 +144,15 @@ The following table shows a matrix of compatible mill and mill-osgi versions.
 |===
 
 == Changelog
+
+=== mill-osgi 0.1.2 - 2020-01-19
+:prev-version: 0.1.1
+:version: 0.1.2
+
+* Use the `artifactId` as base for the default `Bundle-SymbolicName`
+* Added `exportContents` target
+
+_See list of https://github.com/lefou/mill-osgi/compare/{prev-version}...{version}[commits since {prev-version}]._
 
 === mill-osgi 0.1.1 - 2020-01-08
 :prev-version: 0.1.0

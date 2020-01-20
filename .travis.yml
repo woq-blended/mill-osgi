@@ -5,13 +5,13 @@ git:
 
 jdk:
   - openjdk8
-  - openjdk9
-  - openjdk10
   - openjdk11
 
 env:
   - TEST_MILL_VERSION=
   - TEST_MILL_VERSION=0.5.7
+  - TEST_MILL_VERSION=0.5.8
+  - TEST_MILL_VERSION=0.5.9
 
 script:
   - ./millw -i version
